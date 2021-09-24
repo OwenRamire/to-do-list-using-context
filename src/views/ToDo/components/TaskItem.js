@@ -1,18 +1,57 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Alert, StyleSheet} from 'react-native';
 import {Colors} from './Colors';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 const TaskItem = ({taskName}) => {
+  const handleEndTask = () => {
+    Alert.alert('Are you sure?', 'Did you really finish the task?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'OK',
+        onPress: () => console.log('OK Pressed'),
+      },
+    ]);
+  };
+
+  const handleDeleteTask = () => {
+    Alert.alert('Warning', 'Are you sure to delete the task?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'OK',
+        onPress: () => console.log('OK Pressed'),
+      },
+    ]);
+  };
+
   return (
     <View style={styles.containerItem}>
       <View style={styles.contentTask}>
         <View style={styles.pointItem} />
         <Text style={styles.txtTask}>{taskName}</Text>
       </View>
-      <Image
-        source={require('../../../img/circle.png')}
-        style={styles.circleItem}
-      />
+      <View style={styles.btnsTaskItemContainer}>
+        <FontAwesomeIcon
+          name="check-circle"
+          size={30}
+          color={Colors.myGreen}
+          style={styles.btnIcon}
+          onPress={() => handleEndTask()}
+        />
+        <FontAwesomeIcon
+          name="trash"
+          size={30}
+          color={Colors.myRed}
+          style={styles.btnIcon}
+          onPress={() => handleDeleteTask()}
+        />
+      </View>
     </View>
   );
 };
@@ -27,8 +66,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 53,
     marginTop: 20,
-    paddingLeft: 15,
-    paddingRight: 15,
+    paddingHorizontal: 15,
     backgroundColor: Colors.white,
     borderRadius: 15,
     shadowColor: Colors.shadowColor,
@@ -57,5 +95,12 @@ const styles = StyleSheet.create({
   circleItem: {
     width: 20,
     height: 20,
+  },
+  btnsTaskItemContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  btnIcon: {
+    marginHorizontal: 15,
   },
 });

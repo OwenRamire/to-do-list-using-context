@@ -5,4 +5,6 @@ export const Colors = {
   txtGray: '#C0C0C0',
   bluePoint: 'rgba(85, 188, 246, 0.4)',
   shadowColor: '#000',
+  myGreen: '#2ecc71',
+  myRed: '#e74c3c',
 };
