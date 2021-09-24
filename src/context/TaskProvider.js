@@ -6,8 +6,14 @@ const TaskProvider = ({children}) => {
 
   const addNewTask = newTask => setTasks([...tasks, newTask.toLowerCase()]);
 
+  const deleteTask = positionTask => {
+    const updatedTaskList = [...tasks];
+    updatedTaskList.splice(positionTask, 1);
+    setTasks(updatedTaskList);
+  };
+
   return (
-    <TaskContext.Provider value={{tasks, addNewTask}}>
+    <TaskContext.Provider value={{tasks, addNewTask, deleteTask}}>
       {children}
     </TaskContext.Provider>
   );
