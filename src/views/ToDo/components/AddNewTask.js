@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import {
   Text,
   TextInput,
@@ -8,8 +8,21 @@ import {
   Platform,
 } from 'react-native';
 import {Colors} from './Colors';
+import TaskContext from '../../../context/TaskContext';
 
 const AddNewTask = () => {
+  const [currentTask, setCurrentTask] = useState(null);
+  const {addNewTask} = useContext(TaskContext);
+
+  const handleTaskInput = value => {
+    setCurrentTask(value);
+  };
+
+  const handleAddTask = () => {
+    addNewTask(currentTask);
+    setCurrentTask(null);
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -18,8 +31,15 @@ const AddNewTask = () => {
         placeholder="Write a task"
         textAlign="center"
         style={styles.inputTask}
+        value={currentTask}
+        onChangeText={value => handleTaskInput(value)}
       />
-      <TouchableOpacity style={styles.btnAddTask}>
+      <TouchableOpacity
+        style={styles.btnAddTask}
+        disabled={
+          currentTask === null || currentTask.trim() === '' ? true : false
+        }
+        onPress={() => handleAddTask()}>
         <Text style={styles.btnContAddTask}>+</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
