@@ -1,15 +1,14 @@
 import React from 'react';
 import {ScrollView, SafeAreaView, StyleSheet} from 'react-native';
 import {Colors} from './components/Colors';
-import Title from './components/Title';
+import TaskContainer from './components/TaskContainer';
 import AddNewTask from './components/AddNewTask';
 
 const ToDoList = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView style={styles.containerScroll}>
-        <Title titleSection="Today's tasks" />
-        <Title titleSection="Done tasks" />
+        <TaskContainer />
       </ScrollView>
       <AddNewTask />
     </SafeAreaView>
