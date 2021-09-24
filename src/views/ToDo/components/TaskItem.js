@@ -2,12 +2,12 @@ import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {Colors} from './Colors';
 
-const TaskItem = () => {
+const TaskItem = ({taskName}) => {
   return (
     <View style={styles.containerItem}>
       <View style={styles.contentTask}>
         <View style={styles.pointItem} />
-        <Text style={styles.txtTask}>Task</Text>
+        <Text style={styles.txtTask}>{taskName}</Text>
       </View>
       <Image
         source={require('../../../img/circle.png')}
