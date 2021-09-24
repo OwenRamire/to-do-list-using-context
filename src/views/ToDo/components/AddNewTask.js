@@ -62,6 +62,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     color: Colors.txtGray,
     fontSize: 15,
+    shadowColor: Colors.shadowColor,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
   },
   btnAddTask: {
     display: 'flex',
@@ -71,6 +79,14 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     backgroundColor: Colors.white,
+    shadowColor: Colors.shadowColor,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
   },
   btnContAddTask: {
     color: Colors.txtGray,
