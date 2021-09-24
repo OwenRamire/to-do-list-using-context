@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Title from './Title';
 import TaskItem from './TaskItem';
 
@@ -11,7 +11,7 @@ const TaskContainer = ({tasksToDo}) => {
   };
 
   return (
-    <View>
+    <View style={styles.taskContainer}>
       <Title titleSection="Today's tasks" />
       <>{displayAllTasks(tasksToDo)}</>
     </View>
@@ -19,3 +19,9 @@ const TaskContainer = ({tasksToDo}) => {
 };
 
 export default TaskContainer;
+
+const styles = StyleSheet.create({
+  taskContainer: {
+    marginBottom: 60,
+  },
+});
