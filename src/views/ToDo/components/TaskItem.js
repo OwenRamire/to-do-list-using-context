@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, Alert, StyleSheet} from 'react-native';
 import {Colors} from './Colors';
+import TaskContext from '../../../context/TaskContext';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-const TaskItem = ({taskName}) => {
+const TaskItem = ({taskName, id}) => {
+  const {deleteTask} = useContext(TaskContext);
+
   const handleEndTask = () => {
     Alert.alert('Are you sure?', 'Did you really finish the task?', [
       {
@@ -24,8 +27,8 @@ const TaskItem = ({taskName}) => {
         style: 'cancel',
       },
       {
-        text: 'OK',
-        onPress: () => console.log('OK Pressed'),
+        text: 'Delete',
+        onPress: () => deleteTask(id),
       },
     ]);
   };

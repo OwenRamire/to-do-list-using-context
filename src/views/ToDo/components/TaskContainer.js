@@ -6,7 +6,7 @@ import TaskItem from './TaskItem';
 const TaskContainer = ({tasksToDo}) => {
   const displayAllTasks = myTasks => {
     return myTasks?.map((task, i) => {
-      return <TaskItem key={i.toString()} taskName={task} />;
+      return <TaskItem key={i.toString()} taskName={task} id={i} />;
     });
   };
 
