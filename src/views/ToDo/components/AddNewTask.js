@@ -1,16 +1,19 @@
 import React from 'react';
 import {
-  View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import {Colors} from './Colors';
 
 const AddNewTask = () => {
   return (
-    <View style={styles.containerAddTask}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.containerAddTask}>
       <TextInput
         placeholder="Write a task"
         textAlign="center"
@@ -19,7 +22,7 @@ const AddNewTask = () => {
       <TouchableOpacity style={styles.btnAddTask}>
         <Text style={styles.btnContAddTask}>+</Text>
       </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -27,12 +30,10 @@ export default AddNewTask;
 
 const styles = StyleSheet.create({
   containerAddTask: {
-    flex: 0.2,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingVertical: 15,
   },
   inputTask: {
     width: 290,
