@@ -3,8 +3,11 @@ import TaskContext from './TaskContext';
 
 const TaskProvider = ({children}) => {
   const [tasks, setTasks] = useState([]);
+  const [doneTasks, setDoneTask] = useState([]);
 
   const addNewTask = newTask => setTasks([...tasks, newTask.toLowerCase()]);
+
+  const finishTask = task => setDoneTask([...doneTasks, task]);
 
   const deleteTask = positionTask => {
     const updatedTaskList = [...tasks];
@@ -13,7 +16,8 @@ const TaskProvider = ({children}) => {
   };
 
   return (
-    <TaskContext.Provider value={{tasks, addNewTask, deleteTask}}>
+    <TaskContext.Provider
+      value={{tasks, doneTasks, addNewTask, finishTask, deleteTask}}>
       {children}
     </TaskContext.Provider>
   );

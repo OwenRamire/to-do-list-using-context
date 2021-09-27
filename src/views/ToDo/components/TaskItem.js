@@ -4,23 +4,27 @@ import {Colors} from './Colors';
 import TaskContext from '../../../context/TaskContext';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-const TaskItem = ({taskName, id}) => {
-  const {deleteTask} = useContext(TaskContext);
+const TaskItem = ({taskName, id, isDone}) => {
+  const {finishTask, deleteTask} = useContext(TaskContext);
 
-  const handleEndTask = () => {
+  const handleEndTask = (currentTask, currentId) => {
     Alert.alert('Are you sure?', 'Did you really finish the task?', [
       {
         text: 'Cancel',
         style: 'cancel',
       },
       {
-        text: 'OK',
-        onPress: () => console.log('OK Pressed'),
+        text: 'Yes',
+        onPress: () => {
+          console.log(currentTask);
+          finishTask(currentTask);
+          deleteTask(currentId);
+        },
       },
     ]);
   };
 
-  const handleDeleteTask = () => {
+  const handleDeleteTask = currentId => {
     Alert.alert('Warning', 'Are you sure to delete the task?', [
       {
         text: 'Cancel',
@@ -28,9 +32,40 @@ const TaskItem = ({taskName, id}) => {
       },
       {
         text: 'Delete',
-        onPress: () => deleteTask(id),
+        onPress: () => deleteTask(currentId),
       },
     ]);
+  };
+
+  const showIcons = () => {
+    return !isDone ? (
+      <>
+        <FontAwesomeIcon
+          name="check-circle"
+          size={30}
+          color={Colors.myGreen}
+          style={styles.btnIcon}
+          onPress={() => handleEndTask(taskName, id)}
+        />
+        <FontAwesomeIcon
+          name="trash"
+          size={30}
+          color={Colors.myRed}
+          style={styles.btnIcon}
+          onPress={() => handleDeleteTask(id)}
+        />
+      </>
+    ) : (
+      <>
+        <FontAwesomeIcon
+          name="trash"
+          size={30}
+          color={Colors.myRed}
+          style={styles.btnIcon}
+          onPress={() => handleDeleteTask(id)}
+        />
+      </>
+    );
   };
 
   return (
@@ -39,22 +74,7 @@ const TaskItem = ({taskName, id}) => {
         <View style={styles.pointItem} />
         <Text style={styles.txtTask}>{taskName}</Text>
       </View>
-      <View style={styles.btnsTaskItemContainer}>
-        <FontAwesomeIcon
-          name="check-circle"
-          size={30}
-          color={Colors.myGreen}
-          style={styles.btnIcon}
-          onPress={() => handleEndTask()}
-        />
-        <FontAwesomeIcon
-          name="trash"
-          size={30}
-          color={Colors.myRed}
-          style={styles.btnIcon}
-          onPress={() => handleDeleteTask()}
-        />
-      </View>
+      <View style={styles.btnsTaskItemContainer}>{showIcons()}</View>
     </View>
   );
 };

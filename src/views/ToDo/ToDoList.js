@@ -7,13 +7,19 @@ import EmptyTaskList from './components/EmptyTaskList';
 import AddNewTask from './components/AddNewTask';
 
 const ToDoList = () => {
-  const {tasks} = useContext(TaskContext);
+  const {tasks, doneTasks} = useContext(TaskContext);
 
   const displayEmptyOrContainerTaskList = () => {
     if (tasks?.length) {
-      return <TaskContainer tasksToDo={tasks} />;
+      return <TaskContainer tasksToDo={tasks} titleSect="Today's tasks" />;
     } else {
       return <EmptyTaskList />;
+    }
+  };
+
+  const displayEmptyOrContainerTaskListDone = () => {
+    if (doneTasks?.length) {
+      return <TaskContainer doneTasks={doneTasks} titleSect="Done tasks" />;
     }
   };
 
@@ -21,6 +27,7 @@ const ToDoList = () => {
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView style={styles.containerScroll}>
         {displayEmptyOrContainerTaskList()}
+        {displayEmptyOrContainerTaskListDone()}
       </ScrollView>
       <AddNewTask />
     </SafeAreaView>
